@@ -1,0 +1,39 @@
+﻿<h1>goToPage</h1>
+
+<input class="nhsuk-button" id="testHome" type="button" value="Go To NHS Home" onclick="window.nhsapp.navigation.goToHomePage();" />
+    <div>
+      <select class="nhsuk-select" id="goToPageSelection" aria-label="Go To Page Selection">
+      </select>
+      <br />
+      <input class="nhsuk-button" id="goToPage" type="button" value="Go To Page" onclick="goToPageCall()" />
+    </div>
+<input class="nhsuk-button" id="goToInvalidPage" type="button" value="Go To Invalid Page" onclick="goToInvalidPageCall()" />
+
+<div class="nhsuk-back-link">
+    <a class="nhsuk-back-link" asp-action="Index" asp-controller="Api">Back</a>
+</div>
+
+<script type="text/javascript">
+
+      @section javaScriptOnload {   
+         if(window.nhsapp.navigation.AppPage) {
+             var select = document.getElementById("goToPageSelection");
+             Object.keys(window.nhsapp.navigation.AppPage).forEach(key => {
+               var el = document.createElement("option");
+               el.text = key;
+               select.add(el);
+             });
+         }
+      }
+
+      function goToPageCall() {
+          var selection = document.getElementById("goToPageSelection");
+          var selectedPage = selection.options[selection.selectedIndex].text;
+          window.nhsapp.navigation.goToPage(window.nhsapp.navigation.AppPage[selectedPage]);
+      }
+      
+      function goToInvalidPageCall() {
+          window.nhsapp.navigation.goToPage('INVALID_GO_TO_PAGE');
+      }
+  </script>
+  

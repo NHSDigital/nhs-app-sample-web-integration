@@ -1,0 +1,88 @@
+﻿<h1>Show/Hide Header and Footer</h1>
+
+<div class="nhsuk-form-group">
+    <fieldset class="nhsuk-fieldset">
+        <p>
+            The display of the headers and footers can be controlled by the value of the the user-agent. The 
+            Javascript API method <i>isOpenInNHSApp</i> checks the user-agent and if it finds either
+            <strong>nhsapp-ios</strong> or <strong>nhsapp-android</strong> in the contents, then we know we are 
+            running on a native device and the headers/footers can be hidden. 
+        </p>
+        <p>
+            The buttons below can be used to "set" the user-agent before using the "Check User Agent" button to show 
+            or hide the headers and footers.
+        </p>
+
+        <button onclick="updateUserAgentDisplay('nhsapp-ios')" class="nhsuk-button">Set NHS App iOS user agent</button>
+        <button onclick="updateUserAgentDisplay('nhsapp-android')" class="nhsuk-button">Set NHS App Android user agent</button>
+        <br/>
+        <button onclick="resetUserAgent()" class="nhsuk-button">Reset user agent</button>
+        <br/>
+        <label for="user-agent">User Agent</label>
+        <input type="text" id="user-agent" class="nhsuk-input" />
+    </fieldset>
+</div>
+
+
+
+<button class="nhsuk-button" onclick="showHideHeaderFooter()">
+Check User Agent - show/hide headers and footers
+</button>
+
+<div class="nhsuk-back-link">
+    <a class="nhsuk-back-link" asp-action="Index" asp-controller="Api">Back</a>
+</div>
+
+<script type="text/javascript">
+
+    const originalUserAgent = navigator.userAgent;
+    
+    @section javaScriptOnload {
+        document.getElementById('user-agent').value = navigator.userAgent;
+    }
+
+    function resetUserAgent() {
+        updateUserAgentDisplay(originalUserAgent);
+    }
+
+    function updateUserAgentDisplay(value) {
+        document.getElementById('user-agent').value = value;
+    }
+
+    function showHideHeaderFooter() {
+        setUserAgent(document.getElementById('user-agent').value);
+        const isHidden = window.nhsapp.tools.isOpenInNHSApp();
+        document.getElementById("nhsuk-base-header").hidden = isHidden;
+        document.getElementById("nhsuk-base-footer").hidden = isHidden; 
+    }
+    
+    function setUserAgent(userAgent) {
+        // Works on Firefox, Chrome, Opera and IE9+
+        if (navigator.__defineGetter__) {
+            navigator.__defineGetter__('userAgent', function () {
+                return userAgent;
+            });
+        } else if (Object.defineProperty) {
+            Object.defineProperty(navigator, 'userAgent', {
+                get: function () {
+                    return userAgent;
+                }
+            });
+        }
+        // Works on Safari
+        if (window.navigator.userAgent !== userAgent) {
+            var userAgentProp = {
+                get: function () {
+                    return userAgent;
+                }
+            };
+            try {
+                Object.defineProperty(window.navigator, 'userAgent', userAgentProp);
+            } catch (e) {
+                window.navigator = Object.create(navigator, {
+                    userAgent: userAgentProp
+                });
+            }
+        }
+    }
+</script>

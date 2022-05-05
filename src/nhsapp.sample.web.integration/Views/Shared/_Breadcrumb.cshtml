@@ -1,0 +1,22 @@
+﻿@model nhsapp.sample.web.integration.ViewModels.BreadcrumbViewModel
+
+@if (Model != null && Model.Links.Any())
+{
+    <nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+        <div class="nhsuk-width-container">
+            <ol class="nhsuk-breadcrumb__list">
+                @foreach (BreadcrumbLink link in Model.Links)
+                {
+                    <li class="nhsuk-breadcrumb__item">
+                        <a class="nhsuk-breadcrumb__link" href="@link.Url">@link.Text</a>
+                    </li>
+                }
+            </ol>
+            <p class="nhsuk-breadcrumb__back">
+                <a class="nhsuk-breadcrumb__backlink" href="@Model.BackLink.Url">
+                    Back to @Model.BackLink.Text
+                </a>
+            </p>
+        </div>
+    </nav>
+}

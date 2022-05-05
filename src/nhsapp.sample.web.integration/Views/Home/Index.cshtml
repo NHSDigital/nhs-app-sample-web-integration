@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page Title";
+    ViewBag.Description = "Home Page Description";
+}
+
+<h1>Welcome</h1>
+<form method="post">
+    <button class="nhsuk-button" type="submit">
+        Continue with NHS Login
+    </button>
+</form>
+
+<br/>
+
+<form method="get" asp-action="Sso">
+    <label for="identityToken">Paste Single Sign On Token here: </label>
+    <input type="text" 
+           class="nhsuk-input nhsuk-u-margin-bottom-2" 
+           name="assertedLoginIdentity" 
+           id="identityToken"
+           required />
+    <button class="nhsuk-button" type="submit">
+        Continue with NHS Login (Single sign on)
+    </button>
+</form>
+
+<a asp-action="Index" asp-controller="Api">Nhsapp API</a>

@@ -1,0 +1,10 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<script src="~/dist/main.js" type="text/javascript" asp-append-version="true" defer></script>
+@if (Configuration["CookieScriptUrl"] != null)
+{
+  <script src="@Configuration["CookieScriptUrl"]" type="text/javascript" data-cookieconsent="necessary" defer></script>
+}
+
+<script src="@Configuration["NhsappJavascriptApi"]" type="text/javascript" data-cookieconsent="necessary" defer></script>

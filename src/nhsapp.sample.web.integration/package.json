@@ -1,0 +1,31 @@
+{
+  "name": "nhsapp.sample.web.integration",
+  "version": "1.0.0",
+  "description": "A .NET project which include some of the common things needed at NHS.UK.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp build",
+    "start": "gulp",
+    "lint": "eslint wwwroot/src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "nhsuk-frontend": "^5.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "babel-loader": "^8.2.1",
+    "del": "^6.0.0",
+    "eslint": "^7.13.0",
+    "eslint-config-nhsuk": "^1.0.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.38.0",
+    "webpack-stream": "^6.1.0"
+  }
+}

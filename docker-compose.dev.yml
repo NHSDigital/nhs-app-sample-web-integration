@@ -1,0 +1,38 @@
+version: '3'
+
+secrets:
+  auth_signing_private_key:
+    file: "~/.nhsonline/secrets/auth_signing_private_key.pem"
+  auth_signing_password:
+    file: "~/.nhsonline/secrets/auth_signing_rsapass.password"
+
+services:
+  nhsapp-sample-web-integration:
+    secrets:
+      - auth_signing_private_key
+      - auth_signing_password
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Auth__SigningKey=/run/secrets/auth_signing_private_key
+      - Auth__SigningPassword=/run/secrets/auth_signing_password
+      - NhsLogin__ClientId=nhs-online
+      - WebConfiguration__BaseUrl=https://localhost:8443/
+      - ASPNETCORE_URLS=https://+;http://+
+      - ASPNETCORE_HTTPS_PORT=8443
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/nhsuk.base-application.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+    entrypoint:
+    - /bin/bash # The service currently expects secrets as env vars but docker-compose only supports files
+    - -c        # Therefore we run a script before starting the service to read the file into an env var
+    - |
+        if [ -f "$$Auth__SigningPassword" ]; then
+          export Auth__SigningPassword=$$(<$$Auth__SigningPassword)
+        fi
+        exec $$*
+    - "--"
+    command: dotnet nhsapp.sample.web.integration.dll
+    volumes:
+      # macOS/linux
+      - ${HOME}/.aspnet/https:/https/
+      # Windows
+      # - $env:USERPROFILE\.aspnet\https:/https/

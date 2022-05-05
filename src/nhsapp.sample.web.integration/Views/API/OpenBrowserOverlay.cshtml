@@ -1,0 +1,21 @@
+﻿<h1>openBrowserOverlay</h1>
+
+<div>
+    <input class="nhsuk-input full-width nhsuk-input--width-20" id="urlOverlayTextarea" aria-label="URL Overlay Text Area"/>
+    <br />
+    <br />
+    <input class="nhsuk-button" id="openBrowserOverlay" type="button" value="Open Browser Overlay" onclick="openBrowserOverlayCall()" />
+</div>
+
+<div class="nhsuk-back-link">
+    <a class="nhsuk-back-link" asp-action="Index" asp-controller="Api">Back</a>
+</div>
+
+<script type="text/javascript">
+
+    function openBrowserOverlayCall() {
+        var selection = document.getElementById("urlOverlayTextarea");
+        var selectedPage = selection.value;
+        window.nhsapp.navigation.openBrowserOverlay(selectedPage);
+      }
+</script>

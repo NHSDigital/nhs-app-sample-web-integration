@@ -1,0 +1,29 @@
+@model NhsLoginErrorViewModel
+@{
+    ViewBag.Title = "Login Failed";
+}
+
+<h1>
+    We cannot log you in
+</h1>
+
+<p>Login failed with the below details</p>
+
+<dl class="nhsuk-summary-list">
+    <div class="nhsuk-summary-list__row">
+        <dt class="nhsuk-summary-list__key">
+            Error
+        </dt>
+        <dd class="nhsuk-summary-list__value">
+            @Model.Error 
+        </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+        <dt class="nhsuk-summary-list__key">
+            Error Description
+        </dt>
+        <dd class="nhsuk-summary-list__value">
+            @Model.ErrorDescription
+        </dd>
+    </div>
+</dl>

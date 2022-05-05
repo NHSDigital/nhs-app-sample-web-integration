@@ -1,0 +1,17 @@
+﻿<h1>isNativeApp</h1>
+
+<input class="nhsuk-button" id="IsNativeApp" type="button" value="Check IsNativeApp" onclick="IsNativeAppCall()" />
+
+<p id="inNhsApp"></p>
+<p id="NhsAppDeviceType"></p>
+
+<div class="nhsuk-back-link">
+    <a class="nhsuk-back-link" asp-action="Index" asp-controller="Api">Back</a>
+</div>
+
+<script type="text/javascript">
+    function IsNativeAppCall() {
+        document.getElementById("inNhsApp").innerHTML = window.nhsapp.tools.isOpenInNHSApp() ? "Showing in NHS" : "Not showing in NHS";
+        document.getElementById("NhsAppDeviceType").innerHTML = "Device Type: " + window.nhsapp.tools.getAppPlatform();
+    }
+</script>

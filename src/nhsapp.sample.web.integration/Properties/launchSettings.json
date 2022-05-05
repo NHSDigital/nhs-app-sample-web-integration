@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "nhs-app-sample-web-integration": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:8443/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:8443;http://localhost:5001"
+    }
+  }
+}

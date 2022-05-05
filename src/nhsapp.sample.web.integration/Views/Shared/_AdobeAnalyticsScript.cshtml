@@ -1,0 +1,14 @@
+﻿@model nhsapp.sample.web.integration.ViewModels.AdobeAnalyticsViewModel
+
+@if (Model != null && Model.ScriptUrl != null && Model.PageName != null && Model.Categories != null)
+{
+    <script src="@Model.ScriptUrl" type="text/plain" data-cookieconsent="statistics" defer></script>
+    <script type="text/javascript">
+        window.digitalData = {
+            "page": {
+                "pageInfo": { "pageName": "@Model.PageName" },
+                "category": @Html.Raw(@Model.Categories)
+            }
+        };
+    </script>
+}
