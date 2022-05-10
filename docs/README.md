@@ -3,8 +3,8 @@
 ## Introduction
 
 The [NHS App web integration onboarding process](https://nhsconnect.github.io/nhsapp-developer-documentation/web-integration-overview/) requires an application that is:
-- Onboarded with NHS Login
-- NHS Login SSO compatible
+- Onboarded with NHS login
+- NHS login SSO compatible
 - Able to handle "jump offs" from the NHS App in a defined format
 - Behaves as outlined within the NHS App native application
 - And optionally utilise the native app functionality available through [the NHS App JS API](https://nhsconnect.github.io/nhsapp-developer-documentation/js-api-specification/)
@@ -29,7 +29,7 @@ Locally the application will run on `https://localhost:8443`, which can be confi
  [More information about the web app can be found here](WebApp.md)
 
 ## Configuration Settings
-As part of the onboarding process with NHS Login, you will have been given a client id, a signing key and password.
+As part of the onboarding process with NHS login, you will have been given a client id, a signing key and password.
 
 These properties can **either**  be used to populate the following fields in  `appsettings.json`,
 
@@ -129,21 +129,21 @@ Once the app is running, you should see the logged out home page with two button
 
 ### Username / Password Login
 
-Choose the `Continue with NHS Login` button to complete the basic login.  This will take you to the configured NHS Login environment
+Choose the `Continue with NHS login` button to complete the basic login.  This will take you to the configured NHS login environment
 (defaulted to sandpit at the moment) where you can provide a username (email address) and a password. After entering these details,
-the NHS Login `authorize` journey begins.
+the NHS login `authorize` journey begins.
 
-Assuming that the details entered are valid, NHS Login will return the user to the endpoint configured in the `WebConfig:AuthorizeReturnPath`
+Assuming that the details entered are valid, NHS login will return the user to the endpoint configured in the `WebConfig:AuthorizeReturnPath`
 property of `appsettings.json`
 
-Please note that this return URL will have to be whitelisted with NHS Login before the journey can complete correctly.
+Please note that this return URL will have to be whitelisted with NHS login before the journey can complete correctly.
 
 ### Single Sign On (SSO) Login
 
 If the user already has a SSO token, then the token can be pasted into the **Single Sign On** text field in the
 **Logged out home page**
 
-As with a regular login request, a HTTP Request is sent to NHS Login's `authorize` endpoint, but this time with an extra query parameter
+As with a regular login request, a HTTP Request is sent to NHS login's `authorize` endpoint, but this time with an extra query parameter
 named `assertedLoginIdenity.`  An example of the URL that gets constructed is shown below:
 
 ```
@@ -164,18 +164,18 @@ to the login page, paste it into the text box and choose to login with SSO.
 
 ## Error Handling
 
-### Errors from NHS Login
+### Errors from NHS login
 
-In the event NHS Login can authorize the user but there was an error facilitating the request, the configured `return_uri`
+In the event NHS login can authorize the user but there was an error facilitating the request, the configured `return_uri`
 will be redirected to with additional query pramaters indicating why the login request could not be fulfilled.
 
-For example - the user has not accepted NHS Login's Terms & Conditions:
+For example - the user has not accepted NHS login's Terms & Conditions:
 
 `https://localhost:8443/auth-return?error=access_denied&error_description=ConsentNotGiven&state=A`
 
 ### invalid_redirect_uri error
 
-You click continue to NHS Login and receive the following error:
+You click continue to NHS login and receive the following error:
 `{"error": "invalid_redirect_uri", "state": "A"}`
 
-When you initiate a redirect to NHS Login to allow the user to sign in, the redirect_uri you pass must be whitelisted by NHS Login. For default dev, the passed redirect_uri is <https://localhost:8443/auth-return>.
+When you initiate a redirect to NHS login to allow the user to sign in, the redirect_uri you pass must be whitelisted by NHS login. For default dev, the passed redirect_uri is <https://localhost:8443/auth-return>.
