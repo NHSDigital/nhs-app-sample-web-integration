@@ -31,7 +31,7 @@
 @if (!string.IsNullOrEmpty(Model.SsoToken))
 {
     <div id="ssoDiv">
-        <p>Copy the token below and paste into textbox in logged out screen to use Single Sign On option.</p>
+        <p>Copy the token below and paste into textbox in logged out screen to use single sign on option.</p>
         <p>This token will expire in 60 seconds.</p>
         <textarea class="nhsuk-textarea" rows="12" aria-label="SSO Token">@Model.SsoToken</textarea>
     </div>
