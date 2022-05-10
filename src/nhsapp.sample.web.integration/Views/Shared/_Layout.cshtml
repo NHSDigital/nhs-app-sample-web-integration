@@ -4,6 +4,7 @@
     <partial name="_Metadata" />
     <partial name="_AssetsPrefetch" />
     <partial name="_CSSReferences" />
+    @await RenderSectionAsync("css", false)
     <partial name="_FontReferences" />
     <partial name="_JavascriptReferences" />
     <partial name="_AdobeAnalyticsScript" model='@ViewBag.AdobeAnalytics' />

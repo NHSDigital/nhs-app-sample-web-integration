@@ -3,25 +3,45 @@
     ViewBag.Description = "Home Page Description";
 }
 
+@section css {
+    <style>
+        #continue-with-nhs-login-button {
+            height: 60px;
+            width: 345px;
+            display: block;
+            border: unset;
+            box-shadow: unset;
+        }
+        #continue-with-nhs-login-button:hover {
+            cursor: pointer;
+        }
+    </style>
+}
+
 <h1>Welcome</h1>
+
+<h2>Test login with NHS login</h2>
 <form method="post">
-    <button class="nhsuk-button" type="submit">
-        Continue with NHS Login
+    <button id="continue-with-nhs-login-button"
+            type="submit"
+             aria-label="Continue with NHS login">
+        <img src="src/images/nhsuk-button/ContinueWith_Original.svg"
+             alt="Continue with NHS login" />
     </button>
 </form>
 
-<br/>
-
-<form method="get" asp-action="Sso">
-    <label for="identityToken">Paste Single Sign On Token here: </label>
-    <input type="text" 
-           class="nhsuk-input nhsuk-u-margin-bottom-2" 
-           name="assertedLoginIdentity" 
+<h2 class="nhsuk-u-margin-top-6">Test login with single sign on</h2>
+<form method="get" asp-action="Sso" class="nhsuk-inset-text nhsuk-u-margin-top-0">
+    <label for="identityToken">Paste single sign on token here:</label>
+    <input type="text"
+           class="nhsuk-input nhsuk-u-margin-bottom-2"
+           name="assertedLoginIdentity"
            id="identityToken"
-           required />
+           required/>
     <button class="nhsuk-button" type="submit">
-        Continue with NHS Login (Single sign on)
+        Simulate single sign on
     </button>
 </form>
 
-<a asp-action="Index" asp-controller="Api">Nhsapp API</a>
+<h2>Test the NHS JavaScript API</h2>
+<a asp-action="Index" asp-controller="Api">NHS App JavaScript API</a>
